@@ -6,6 +6,10 @@ class Currency {
     times(multiplier){
         return new Currency(this.amount * multiplier, this.currency);
     }
+
+    divideBy(divider){
+        return new Currency(this.amount / divider, this.currency);
+    }
 }
 class Dollar extends Currency {
     constructor(amount) {
@@ -44,3 +48,8 @@ tenEUR = new Currency(10, 'EUR');
 twentyEUR = tenEUR.times(2);
 assert.strictEqual(twentyEUR.amount, 20);
 assert.strictEqual(twentyEUR.currency, 'EUR');
+
+let huf = new Huf(4002);
+let div = huf.divideBy(4);
+const expected = 1000.5;
+assert.strictEqual(Math.abs(div.amount - expected) <= Number.EPSILON, true);
