@@ -1,5 +1,6 @@
 # tdd-git-t360
 
 elso   
-masodik   
-haramdik   
+masodik  
+harmadik  
+de merge conflict volt
