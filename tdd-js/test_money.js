@@ -49,6 +49,7 @@ twentyEUR = tenEUR.times(2);
 assert.strictEqual(twentyEUR.amount, 20);
 assert.strictEqual(twentyEUR.currency, 'EUR');
 
+// 4002 HUF / 4 = 1000.5 HUF
 let huf = new Huf(4002);
 let div = huf.divideBy(4);
 const expected = 1000.5;
