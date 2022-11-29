@@ -1,5 +1,7 @@
 # tdd-git-t360
 
 elso   
-masodik alt   
-harmadik alt   
+masodik   
+haramdik   
+conflict-ot fel kellett oldani
+
