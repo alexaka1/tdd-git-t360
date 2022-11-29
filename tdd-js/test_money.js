@@ -53,4 +53,5 @@ assert.strictEqual(twentyEUR.currency, 'EUR');
 let huf = new Huf(4002);
 let div = huf.divideBy(4);
 const expected = 1000.5;
-assert.strictEqual(Math.abs(div.amount - expected) <= Number.EPSILON, true);
+const epsilon = Number.EPSILON;
+assert.strictEqual(Math.abs(div.amount - expected) <= epsilon, true);
