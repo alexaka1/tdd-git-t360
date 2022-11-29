@@ -28,6 +28,25 @@ class Huf extends Currency {
     }
 }
 
+class Portfolio {
+    constructor() {
+        this.currencies = [];
+    }
+    add(currency){
+        this.currencies.push({currency, meth: 'add'});
+    }
+    evaluate(currency){
+        return this.currencies.reduce(function(prev, curr){
+            switch (curr.meth) {
+                case 'add':
+                    return new Currency(prev.currency.amount + curr.currency.amount, currency);
+                default:
+                    return new Currency(prev.currency.amount + curr.currency.amount, currency);
+            }
+        });
+    }
+}
+
 
 
 const assert = require("assert");
@@ -52,6 +71,16 @@ assert.strictEqual(twentyEUR.currency, 'EUR');
 // 4002 HUF / 4 = 1000.5 HUF
 let huf = new Huf(4002);
 let div = huf.divideBy(4);
-const expected = 1000.5;
-const epsilon = Number.EPSILON;
-assert.strictEqual(Math.abs(div.amount - expected) <= epsilon, true);
+const expected = new Currency(1000.5, 'HUF');
+const epsilon = 0.01;
+assert.strictEqual(Math.abs(div.amount - expected.amount) <= epsilon, true);
+assert.strictEqual(div.currency, expected.currency);
+
+// 5 USD + 10 USD = 15 USD;
+let ftDoll = new Currency(15, 'USD');
+let fDoll = new Currency(5, 'USD');
+let tenDoll = new Currency(10, 'USD');
+let portfolio = new Portfolio();
+portfolio.add(fDoll);
+portfolio.add(tenDoll);
+assert.deepStrictEqual(portfolio.evaluate('USD'), ftDoll);
