@@ -30,28 +30,35 @@ class Huf extends Currency {
 
 class Portfolio {
   constructor() {
-    this.currencies = [];
+    this.money = [];
+  }
+  set currencies(values) {
+    this.money = [];
+    this.money.push(...values);
+  }
+  get currencies() {
+    return this.money.map(x=>x);
   }
   add(currency) {
-    this.currencies.push({ currency, meth: "add" });
+    this.money.push(currency);
   }
   evaluate(currency) {
-    let result = this.currencies.reduce(function (prev, curr) {
-      if (prev.currency.currency !== "USD") {
-        prev.currency = Portfolio.convert(prev.currency, "USD");
+    let result = this.money.reduce(function (prev, curr) {
+      if (prev.currency !== "USD") {
+        prev = Portfolio.convert(prev, "USD");
       }
-      if (curr.currency.currency !== "USD") {
-        curr.currency = Portfolio.convert(curr.currency, "USD");
+      if (curr.currency !== "USD") {
+        curr = Portfolio.convert(curr, "USD");
       }
       switch (curr.meth) {
         case "add":
           return new Currency(
-            prev.currency.amount + curr.currency.amount,
+            prev.amount + curr.amount,
             "USD"
           );
         default:
           return new Currency(
-            prev.currency.amount + curr.currency.amount,
+            prev.amount + curr.amount,
             "USD"
           );
       }
@@ -132,3 +139,13 @@ portfolio = new Portfolio();
 portfolio.add(oneusd);
 portfolio.add(thousHuf);
 assert.deepStrictEqual(portfolio.evaluate("HUF"), expected);
+
+
+let p1 = new Portfolio();
+let p2 = new Portfolio();
+
+p1.add(new Dollar(10));
+p2.currencies = p1.currencies;
+p1.add(new Dollar(10));
+
+assert.deepStrictEqual(p2.evaluate('USD'), new Dollar(10));
