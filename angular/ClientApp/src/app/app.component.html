@@ -16,12 +16,26 @@
 </table>
 <hr>
 <div class="spacer"></div>
-<div>
-  <select [(ngModel)]="currency">
-    <option [value]="undefined" [disabled]="true">Currency:</option>
-    <option *ngFor="let c of currencies" value="{{c}}">{{c}}</option>
-  </select>
-  <input placeholder="Amount" [(ngModel)]="amount"/>
-  <button (click)="add()">Add</button>
-</div>
+<
+<!--<div>-->
+<!--  <select [(ngModel)]="currency">-->
+<!--    <option [value]="undefined" [disabled]="true">Currency:</option>-->
+<!--    <option *ngFor="let c of currencies" value="{{c}}">{{c}}</option>-->
+<!--  </select>-->
+<!--  <input placeholder="Amount" [(ngModel)]="amount"/>-->
+<!--  <button (click)="add()">Add</button>-->
+<!--</div>-->
+<!--<form #moneyForm="ngForm" (ngSubmit)="add()" data-test="newMoneyForm">-->
+<!--  <p>-->
+<!--    <label>Amount</label>-->
+<!--    <input type="number" [(ngModel)]="amount" name="amount">-->
+<!--  </p>-->
+<!--  <p>-->
+<!--    <label>Currency</label>-->
+<!--    <input type="text" [(ngModel)]="currency" name="currency">-->
+<!--  </p>-->
+<!--  <p>-->
+<!--    <button type="submit" data-test="newMoneySubmit">Add money</button>-->
+<!--  </p>-->
+<!--</form>-->
 <!-- <router-outlet></router-outlet> -->

@@ -18,23 +18,9 @@ export class AppComponent {
   constructor(private moneyService: MoneyService) {
     this.moneys = moneyService.list();
   }
-
-  add() {
-    if (this.amount && this.currency) {
-      this.moneyService.add({
-        amount: this.amount,
-        currency: this.currency,
-      });
-      this.reset();
-  }
-
-  }
   remove(index: number){
     this.moneyService.remove(index);
   }
-  reset(){
-    this.amount = null;
-    this.currency = null;
-  }
+
 }
 
