@@ -36,40 +36,44 @@ class Portfolio {
     this.currencies.push({ currency, meth: "add" });
   }
   evaluate(currency) {
-    let result=  this.currencies.reduce(function (prev, curr) {
-      if(prev.currency.currency !== 'USD'){
-        prev.currency = Portfolio.convert(prev.currency, 'USD');
+    let result = this.currencies.reduce(function (prev, curr) {
+      if (prev.currency.currency !== "USD") {
+        prev.currency = Portfolio.convert(prev.currency, "USD");
       }
-      if(curr.currency.currency !== 'USD'){
-        curr.currency = Portfolio.convert(curr.currency, 'USD');
+      if (curr.currency.currency !== "USD") {
+        curr.currency = Portfolio.convert(curr.currency, "USD");
       }
       switch (curr.meth) {
         case "add":
           return new Currency(
             prev.currency.amount + curr.currency.amount,
-            'USD'
+            "USD"
           );
         default:
           return new Currency(
             prev.currency.amount + curr.currency.amount,
-            'USD'
+            "USD"
           );
       }
     });
-    return Portfolio.convert(result, currency)
+    return Portfolio.convert(result, currency);
   }
-  static convert(money, currency){
-    switch(money.currency){
-    case "EUR":
-      return new Dollar(money.amount * 1.2);
-    case "HUF":
-      return new Dollar(money.amount / 1100);
-    }
-    switch(currency) {
+  static convert(money, currency) {
+    switch (money.currency) {
       case "EUR":
-        return new Euro(money.amount / 1.2);
-        case "HUF":
-        return new Huf(money.amount * 1100);
+        money = new Dollar(money.amount * 1.2);
+        break;
+      case "HUF":
+        money = new Dollar(money.amount / 1100);
+        break;
+    }
+    switch (currency) {
+      case "EUR":
+        money = new Euro(money.amount / 1.2);
+        break;
+      case "HUF":
+        money = new Huf(money.amount * 1100);
+        break;
     }
     return money;
   }
