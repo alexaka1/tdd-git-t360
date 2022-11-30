@@ -36,20 +36,42 @@ class Portfolio {
     this.currencies.push({ currency, meth: "add" });
   }
   evaluate(currency) {
-    return this.currencies.reduce(function (prev, curr) {
+    let result=  this.currencies.reduce(function (prev, curr) {
+      if(prev.currency.currency !== 'USD'){
+        prev.currency = Portfolio.convert(prev.currency, 'USD');
+      }
+      if(curr.currency.currency !== 'USD'){
+        curr.currency = Portfolio.convert(curr.currency, 'USD');
+      }
       switch (curr.meth) {
         case "add":
           return new Currency(
             prev.currency.amount + curr.currency.amount,
-            currency
+            'USD'
           );
         default:
           return new Currency(
             prev.currency.amount + curr.currency.amount,
-            currency
+            'USD'
           );
       }
     });
+    return Portfolio.convert(result, currency)
+  }
+  static convert(money, currency){
+    switch(money.currency){
+    case "EUR":
+      return new Dollar(money.amount * 1.2);
+    case "HUF":
+      return new Dollar(money.amount / 1100);
+    }
+    switch(currency) {
+      case "EUR":
+        return new Euro(money.amount / 1.2);
+        case "HUF":
+        return new Huf(money.amount * 1100);
+    }
+    return money;
   }
 }
 
@@ -75,7 +97,7 @@ assert.strictEqual(twentyEUR.currency, "EUR");
 // 4002 HUF / 4 = 1000.5 HUF
 let huf = new Huf(4002);
 let div = huf.divideBy(4);
-const expected = new Currency(1000.5, "HUF");
+let expected = new Currency(1000.5, "HUF");
 const epsilon = 0.01;
 assert.strictEqual(Math.abs(div.amount - expected.amount) <= epsilon, true);
 assert.strictEqual(div.currency, expected.currency);
@@ -97,3 +119,12 @@ portfolio = new Portfolio();
 portfolio.add(fDoll);
 portfolio.add(tenDoll);
 assert.deepStrictEqual(portfolio.evaluate("USD"), ftDoll);
+
+//1 USD + 1100 HUF = 2200 HUF
+let oneusd = new Dollar(1);
+let thousHuf = new Huf(1100);
+expected = new Huf(2200);
+portfolio = new Portfolio();
+portfolio.add(oneusd);
+portfolio.add(thousHuf);
+assert.deepStrictEqual(portfolio.evaluate("HUF"), expected);
