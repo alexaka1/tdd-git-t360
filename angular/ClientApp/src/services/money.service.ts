@@ -24,8 +24,10 @@ export class MoneyService {
     this.moneys.splice(this.moneys.findIndex(m=> m.id === id), 1);
   }
 
-  list(): Observable<Currency[]>{
-    return of(this.moneys);
+  list(ordered: boolean = false): Observable<Currency[]>{
+    return of(ordered ?
+      this.moneys.sort((a, b) => a.currency.localeCompare(b.currency)) :
+      this.moneys);
   }
 
   addNumbers(a: number, b: number): number{

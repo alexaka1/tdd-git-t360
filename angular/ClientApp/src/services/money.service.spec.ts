@@ -51,5 +51,21 @@ describe('MoneyService', () => {
         expect(moneys.length).toEqual(2);
       });
     });
+    it('should list money in order of currency', () => {
+      service.add({amount: 1, currency: 'USD'});
+      service.add({amount: 2, currency: 'USD'});
+      service.add({amount: 3, currency: 'EUR'});
+      service.add({amount: 4, currency: 'EUR'});
+      service.list(true).subscribe((moneys) => {
+        expect(moneys[0].amount).toEqual(3);
+        expect(moneys[0].currency).toEqual('EUR');
+        expect(moneys[1].amount).toEqual(4);
+        expect(moneys[1].currency).toEqual('EUR');
+        expect(moneys[2].amount).toEqual(1);
+        expect(moneys[2].currency).toEqual('USD');
+        expect(moneys[3].amount).toEqual(2);
+        expect(moneys[3].currency).toEqual('USD');
+      });
+    });
   }
 );
