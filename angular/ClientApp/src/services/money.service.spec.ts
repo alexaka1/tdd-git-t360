@@ -13,4 +13,7 @@ describe('MoneyService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  // it('should be failed', () => {
+  //   expect(false).toBeTruthy();
+  // });
 });
