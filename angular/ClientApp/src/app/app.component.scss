@@ -1,0 +1,14 @@
+.spacer{
+  margin-top: 1rem;
+}
+.table {
+  margin-top: 1rem;
+  width: 100%;
+  //border: 0.1rem solid #000;
+& td, & th{
+  border: 0.05rem solid #000;
+  border-spacing: 0;
+  text-align: center;
+}
+}
+
