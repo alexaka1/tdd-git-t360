@@ -27,6 +27,10 @@ export class MoneyService {
   list(): Observable<Currency[]>{
     return of(this.moneys);
   }
+
+  addNumbers(a: number, b: number): number{
+    return a + b;
+  }
 }
 
 export interface Money {
