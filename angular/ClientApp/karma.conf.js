@@ -7,7 +7,7 @@ module.exports = function (config) {
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
       require("karma-jasmine"),
-      // require("karma-chrome-launcher"),
+      require("karma-chrome-launcher"),
       require("karma-brave-launcher"),
       require("@chiragrupani/karma-chromium-edge-launcher"),
       require("karma-jasmine-html-reporter"),
@@ -37,6 +37,16 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ["Edge"],
+    customLaunchers: {
+      Headless: {
+        base: 'Edge',
+        flags: [
+          '--headless',
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          ]
+      }
+    },
     singleRun: false,
     restartOnFileChange: true,
   });
