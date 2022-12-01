@@ -149,3 +149,5 @@ p2.currencies = p1.currencies;
 p1.add(new Dollar(10));
 
 assert.deepStrictEqual(p2.evaluate('USD'), new Dollar(10));
+
+{}+[];

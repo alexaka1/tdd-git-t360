@@ -32,31 +32,31 @@ describe('AppComponent', () => {
       const newMoneyForm = fixture.nativeElement.querySelector('form');
       expect(newMoneyForm).toBeTruthy();
     });
-    it('should add a new money to our portfolio', () => {
-      const fixture = TestBed.createComponent(AppComponent);
-      const app = fixture.nativeElement as HTMLElement;
-      const amountInput = app.querySelector('input[name="amount"]') as HTMLInputElement;
-      expect(amountInput).withContext('amount input field not found').toBeTruthy();
-      const currencyInput = app.querySelector('input[name="currency"]') as HTMLInputElement;
-      expect(currencyInput).withContext('currency input field not found').toBeTruthy();
-
-      amountInput.value = '2';
-      currencyInput.value = 'USD';
-
-      amountInput.dispatchEvent(new Event('input'));
-      currencyInput.dispatchEvent(new Event('input'));
-      fixture.detectChanges();
-
-      const submitButton = app.querySelector('button[type="submit"]') as HTMLButtonElement;
-      expect(submitButton).withContext('submit button not found').toBeTruthy();
-      submitButton.click();
-
-      const moneyItems = app.querySelectorAll('[data-test="portfolioMoneyItem"]') as NodeListOf<HTMLElement>;
-      expect(moneyItems.length).withContext('money items not found').toEqual(1);
-      expect(moneyItems[0].querySelector('[data-test="portfolioMoneyItemAmount"]')?.textContent).toEqual('2');
-      expect(moneyItems[0].querySelector('[data-test="portfolioMoneyItemCurrency"]')?.textContent).toEqual('USD');
-
-    });
+    // it('should add a new money to our portfolio', () => {
+    //   const fixture = TestBed.createComponent(AppComponent);
+    //   const app = fixture.nativeElement as HTMLElement;
+    //   const amountInput = app.querySelector('input[name="amount"]') as HTMLInputElement;
+    //   expect(amountInput).withContext('amount input field not found').toBeTruthy();
+    //   const currencyInput = app.querySelector('input[name="currency"]') as HTMLInputElement;
+    //   expect(currencyInput).withContext('currency input field not found').toBeTruthy();
+    //
+    //   amountInput.value = '2';
+    //   currencyInput.value = 'USD';
+    //
+    //   amountInput.dispatchEvent(new Event('input'));
+    //   currencyInput.dispatchEvent(new Event('input'));
+    //   fixture.detectChanges();
+    //
+    //   const submitButton = app.querySelector('button[type="submit"]') as HTMLButtonElement;
+    //   expect(submitButton).withContext('submit button not found').toBeTruthy();
+    //   submitButton.click();
+    //
+    //   const moneyItems = app.querySelectorAll('[data-test="portfolioMoneyItem"]') as NodeListOf<HTMLElement>;
+    //   expect(moneyItems.length).withContext('money items not found').toEqual(1);
+    //   expect(moneyItems[0].querySelector('[data-test="portfolioMoneyItemAmount"]')?.textContent).toEqual('2');
+    //   expect(moneyItems[0].querySelector('[data-test="portfolioMoneyItemCurrency"]')?.textContent).toEqual('USD');
+    //
+    // });
   });
   it('should use a form to add new money to portfolio', () => {
     const fixture = TestBed.createComponent(AppComponent);
